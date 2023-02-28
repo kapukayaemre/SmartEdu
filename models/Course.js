@@ -21,6 +21,10 @@ const CourseSchema = new Schema({
     type: String,
     unique: true,
   },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category', //* Referans Verdiğimiz Model Adı
+  },
 });
 
 CourseSchema.pre('validate', function (next) {
