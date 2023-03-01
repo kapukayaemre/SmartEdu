@@ -31,7 +31,9 @@ exports.getContactPage = (req, res) => {
 };
 
 exports.sendEmail = async (req, res) => {
-  
+
+  try {
+
   const outputMessage = `
   
   <h1> Mail Details </h1>
@@ -48,15 +50,15 @@ exports.sendEmail = async (req, res) => {
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: "yourmail@mail.com", // gmail account
-      pass: "yourpassword", // gmail password
+      user: "kpkyemre111@gmail.com", // gmail account
+      pass: "uhbofrfqhsppvogk", // gmail password
     },
   });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"SmartEdu Contact Form 👻" <yourmail@mail.com>', // sender address
-    to: "receiver@hotmail.com", // list of receivers
+    from: '"SmartEdu Contact Form 👻" <kpkyemre@gmail.com>', // sender address
+    to: "kapukayaemre@hotmail.com", // list of receivers
     subject: "SmartEdu Contact Form New Message ✔", // Subject line
     // text: "Hello world?", // plain text body
     html: outputMessage // html body
@@ -69,6 +71,13 @@ exports.sendEmail = async (req, res) => {
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
+  req.flash('success', 'We received your message successfully');
+
   res.status(200).redirect('contact');
+} catch (err) {
+  // req.flash('error', ` Something happend! ${err} `);
+  req.flash('error', ` Something happened! `);
+  res.status(200).redirect('contact');
+}
 
 };
