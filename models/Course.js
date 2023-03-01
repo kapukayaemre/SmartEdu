@@ -15,7 +15,7 @@ const CourseSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    defaul: Date.now,
+    default: Date.now,
   },
   slug: {
     type: String,
@@ -25,6 +25,10 @@ const CourseSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category', //* Referans Verdiğimiz Model Adı
   },
+  user: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 CourseSchema.pre('validate', function (next) {
